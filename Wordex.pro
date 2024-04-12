@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     ButtonLetter.cpp \
+    keyboard.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     ButtonLetter.h \
+    keyboard.h \
     mainwindow.h
 
 FORMS += \
