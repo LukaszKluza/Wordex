@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++23
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -10,12 +10,20 @@ CONFIG += c++11
 
 SOURCES += \
     ButtonLetter.cpp \
+    gameplay.cpp \
+    keyboard.cpp \
+    labelLetter.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    wordloarder.cpp
 
 HEADERS += \
     ButtonLetter.h \
-    mainwindow.h
+    gameplay.h \
+    keyboard.h \
+    labelLetter.h \
+    mainwindow.h \
+    wordloarder.h
 
 FORMS += \
     mainwindow.ui
@@ -24,3 +32,8 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    ../../../../../../Downloads/sgb-words.txt \
+    Styles/style.css \
+    style.css

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <gameplay.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,9 +14,11 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void keyPressEvent(QKeyEvent *event) override;
     ~MainWindow();
 
 private:
+    Gameplay *gameplay;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

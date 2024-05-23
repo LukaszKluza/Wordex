@@ -2,6 +2,10 @@
 #include "ui_mainwindow.h"
 #include <QPushButton>
 #include <ButtonLetter.h>
+#include "keyboard.h"
+#include "gameplay.h"
+#include <iostream>
+#include <QKeyEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,26 +13,32 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("Wordex");
-    int width = this->width();
-    int height = this->height();
-    ButtonLetter *buttonLetter = new ButtonLetter(this,'c');
-    buttonLetter->display();
+    gameplay = new Gameplay(this);
+}
 
-
-    QPushButton *newButton = new QPushButton(this);
-    newButton->setGeometry((width-50)/2,(height-50)/2,50,50);
-    newButton->setStyleSheet("background-color: rgb(123, 0, 0); color: white;");
-    newButton->setText("KOKO");
-    newButton->setStyleSheet("QPushButton {text-align: center}");
-    newButton->show();
-    connect(newButton, &QPushButton::clicked, this,[=](){
-        newButton->setText("KIKI");
-        newButton->setEnabled(false);
-    });
+void MainWindow::keyPressEvent(QKeyEvent *event){
+  char letter = event->key();
+  if(letter >= 'A' && letter <='Z'){
+      gameplay->update(letter);
+  }
+  else if(Qt::Key_Return == event->key()){
+      gameplay->check();
+  }
+  else if (Qt::Key_Backspace == event->key()) {
+      gameplay->erase();
+  }
+  else if(Qt::Key_Escape == event->key()){
+      close();
+      qApp->quit();
+  }
+  else{
+      QWidget::keyPressEvent(event);
+  }
 }
 
 MainWindow::~MainWindow()
 {
+    delete gameplay;
     delete ui;
 }
 
